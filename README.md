@@ -2,17 +2,30 @@
 YT:
 https://www.youtube.com/watch?v=XDHDTGoZ_68&list=PLfJPWXrs22BnEQPKxcEr_7uCOV-9sOBQu&index=3
 
-github:
-https://github.com/FrancescoXX/go-fullstack-app/tree/main
+### Local
+/Users/mpamdev03/projects/go/
+
+### Github:
+https://github.com/yuttana76/go-fullstack-app.git
+
 
 ## docker command
 >docker compose build
 >docker compose up -d
 >docker compose down
 
-## Docker remove <none> TAG images
+ <!-- Docker remove <none> TAG images -->
 >docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
+## Make  command
+>make <tag>
+Eample>
+>make up
+>make up_build
+>make down
+
+## Frontend
+http://127.0.0.1:3000/
 
 ## API
 http://localhost:8000/api/go/users
@@ -20,22 +33,20 @@ http://localhost:8000/api/go/users
 ## Postgrest command
 >docker exec -it db psql -U postgres
 
-### List of databases
+ <!-- List of databases -->
 >\l
 
-### List of relations
+ <!-- List of relations -->
 >\dt
 
+<!-- Exit cmd shell -->
 >exit
 
-## Make   file
->make <tag>
-Eample>
->make up
->make up_build
->make down
 
 ##  RabbitMQ
 http://localhost:15672/#/queues
 
 https://www.rabbitmq.com/tutorials/tutorial-one-go
+
+## Swagger
+>swag init

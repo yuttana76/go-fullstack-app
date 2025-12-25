@@ -14,6 +14,10 @@ import (
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
 	amqp "github.com/rabbitmq/amqp091-go"
+
+	httpSwagger "github.com/swaggo/http-swagger/v2"
+
+	_ "api/docs"
 )
 
 type User struct {
@@ -37,7 +41,12 @@ func failOnError(err error, msg string) {
 	}
 }
 
-// main function
+// @title Swagger Example API
+// @version 1.0
+// @description This is a sample server.
+// @termsOfService http://swagger.io/terms/
+// @host localhost:8000
+// @BasePath /api/go
 func main() {
 
 	//connect to database
@@ -63,6 +72,11 @@ func main() {
 
 	// wrap the router with CORS and JSON content type middlewares
 	enhancedRouter := enableCORS(jsonContentTypeMiddleware(router))
+
+	// Serve Swagger UI at /swagger/
+	router.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
+		httpSwagger.URL("http://localhost:8000/swagger/doc.json"), // URL to JSON spec
+	)).Methods("GET")
 
 	// start server
 	log.Fatal(http.ListenAndServe(":8000", enhancedRouter))
@@ -162,7 +176,15 @@ func (app *Config) pushToQueue(name, msg string) error {
 	return nil
 }
 
-// get all users
+// getUsers returns all users
+//
+//	@Summary		Returns all users
+//	@Description	Returns all users
+//	@Tags			users
+//	@Accept			json
+//	@Produce		json
+//	@Success		200		{object}	[]User
+//	@Router			/users [get]
 func getUsers(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		rows, err := db.Query("SELECT * FROM users")
@@ -187,7 +209,16 @@ func getUsers(db *sql.DB) http.HandlerFunc {
 	}
 }
 
-// get user by id
+// GetUser returns a single user
+//
+//		@Summary		Returns a single user
+//		@Description	Returns a single eventuseer
+//		@Tags			user
+//		@Accept			json
+//		@Produce		json
+//		@Param			id	path		int	true	"User ID"
+//		@Success		200	{object}	User
+//	 	@Router 		/users/{id} [get]
 func getUser(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)

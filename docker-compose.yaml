@@ -1,0 +1,69 @@
+services:
+
+  backend-service:
+    build:
+      context: ./backend
+      dockerfile: ./backend-service.dockerfile
+    environment:
+      DATABASE_URL: 'postgres://postgres:postgres@db:5432/postgres?sslmode=disable'
+      RABBITMQ_URL: 'amqp://myrabbit:password@rabbitmq'
+    ports:
+      - '8000:8000'
+    depends_on:
+      db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+
+  listener-service:
+    build: 
+      context: ./listener-service
+      dockerfile: listener-service.dockerfile
+    environment:
+      RABBITMQ_URL: 'amqp://myrabbit:password@rabbitmq'
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  db:
+    container_name: db
+    image: postgres:14.0-alpine   
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - 5433:5432
+    volumes:
+      - ./data/postgres_data:/var/lib/postgresql/data # Persists data in a named volume
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+  rabbitmq:
+      image: rabbitmq:management-alpine
+      tty: true
+      volumes:
+        - ./data/rabbitmq_data:/var/lib/rabbitmq # Persistent volume for RabbitMQ data
+
+      healthcheck:
+        test: ["CMD", "rabbitmq-diagnostics", "ping", "-q"] # Use rabbitmq-diagnostics ping
+        interval: 30s
+        timeout: 10s
+        retries: 5
+        start_period: 15s # Give RabbitMQ extra time to initialize
+      environment:
+        RABBITMQ_DEFAULT_USER: "myrabbit" # Set default RabbitMQ user
+        RABBITMQ_DEFAULT_PASS: "password" # Set default RabbitMQ password
+      ports:
+        - "15672:15672"
+        - "5672:5672"
+
+volumes:
+  rabbitmq_data:
+    driver: local
+  postgres_data:
+      driver: local

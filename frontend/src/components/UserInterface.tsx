@@ -1,6 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CardComponent from './CardComponent';
+
+// import { loadEnvConfig } from '@next/env'
 
 interface User {
   id: number;
@@ -13,7 +16,14 @@ interface UserInterfaceProps {
 }
 
 const UserInterface: React.FC<UserInterfaceProps> = ({ backendName }) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+  
+  // const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+  // const apiUrl = process.env.API_URL || 'http://localhost:8000';
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  // console.log('*NEXT_PUBLIC_API_URL:', process.env.NEXT_PUBLIC_API_URL);
+
   const [users, setUsers] = useState<User[]>([]);
   const [newUser, setNewUser] = useState({ name: '', email: '' });
   const [updateUser, setUpdateUser] = useState({ id: '', name: '', email: '' });
