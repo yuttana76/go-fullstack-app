@@ -45,7 +45,7 @@ func failOnError(err error, msg string) {
 // @version 1.0
 // @description This is a sample server.
 // @termsOfService http://swagger.io/terms/
-// @host localhost:8000
+// @host go-api.localhost
 // @BasePath /api/go
 func main() {
 
@@ -74,8 +74,13 @@ func main() {
 	enhancedRouter := enableCORS(jsonContentTypeMiddleware(router))
 
 	// Serve Swagger UI at /swagger/
+	// router.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
+	// 	httpSwagger.URL("http://localhost:8000/swagger/doc.json"), // URL to JSON spec
+	// )).Methods("GET")
+
+	// Serve Swagger UI at(nginx) /swagger/
 	router.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
-		httpSwagger.URL("http://localhost:8000/swagger/doc.json"), // URL to JSON spec
+		httpSwagger.URL("http://localhost/swagger/doc.json"), // URL to JSON spec
 	)).Methods("GET")
 
 	// start server

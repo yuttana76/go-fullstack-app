@@ -50,3 +50,9 @@ https://www.rabbitmq.com/tutorials/tutorial-one-go
 
 ## Swagger
 >swag init
+
+### AWS 
+>ssh -i "go-api-key.pem" ec2-user@43.209.178.219
+
+### Install git
+>sudo dnf install git -y

@@ -7,7 +7,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "localhost:8000",
+    "host": "go-api.localhost",
     "basePath": "/api/go",
     "paths": {
         "/users": {

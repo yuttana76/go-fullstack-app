@@ -24,9 +24,9 @@ up_build: build_backend build_listener
 
 ## build_listener: builds the listener binary as a linux executable
 build_backend:
-	@echo "Building listener binary..."
+	@echo "Building backend binary..."
 	cd ./backend && env GOOS=linux CGO_ENABLED=0 go build -o ./build_app/${BANKEND_BINARY} .
-	@echo "listener Done!"
+	@echo "backend Done!"
 
 ## build_listener: builds the listener binary as a linux executable
 build_listener:

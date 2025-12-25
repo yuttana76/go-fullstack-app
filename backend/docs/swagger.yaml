@@ -9,7 +9,7 @@ definitions:
       name:
         type: string
     type: object
-host: localhost:8000
+host: go-api.localhost
 info:
   contact: {}
   description: This is a sample server.
