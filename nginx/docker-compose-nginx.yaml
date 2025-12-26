@@ -69,6 +69,12 @@ services:
     depends_on:
       - backend-service
 
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+
 volumes:
   rabbitmq_data:
     driver: local
