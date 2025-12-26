@@ -58,11 +58,9 @@ Comment out the listen 443 block in your nginx.conf temporarily.
 Start NGINX: Run docker-compose up -d nginx-proxy.
 Run Certbot: Execute the following command to request your certificate:
 
-3.1
 ```
 docker-compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d go-api.holidaystudio.club
 ```
-3.2
 Remove --dry-run once the test passes to get the actual certificate.
 ```
 docker-compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d go-api.holidaystudio.club

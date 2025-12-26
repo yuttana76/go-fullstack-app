@@ -119,4 +119,3 @@ Add record>Type=A ;Name=go-api;Content=<public ip>
 ### Check DNS
 www.whatsmydns.net
 search for =go-api.holidaystudio.club
-
