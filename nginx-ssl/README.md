@@ -59,7 +59,7 @@ Start NGINX: Run docker-compose up -d nginx-proxy.
 Run Certbot: Execute the following command to request your certificate:
 
 ```
-docker-compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d go-api.holidaystudio.club
+docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d go-api.holidaystudio.club
 ```
 Remove --dry-run once the test passes to get the actual certificate.
 ```

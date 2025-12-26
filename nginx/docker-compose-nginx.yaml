@@ -1,4 +1,16 @@
 services:
+
+  nextapp:
+    container_name: nextapp
+    image: nextapp:1.0.0
+    build:
+      context: ../frontend
+      dockerfile: next.dockerfile
+    ports:
+      - '3000:3000'
+    env_file:
+      - ../frontend/.env.local
+
   backend-service:
     build:
       context: ../backend
@@ -68,13 +80,6 @@ services:
       - "80:80" # Exposed to the host machine
     depends_on:
       - backend-service
-
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-
 volumes:
   rabbitmq_data:
     driver: local
