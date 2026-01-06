@@ -80,8 +80,8 @@ func main() {
 
 	// Serve Swagger UI at(nginx) /swagger/
 	router.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
-		// httpSwagger.URL("http://localhost/swagger/doc.json"), // URL to JSON spec
-		httpSwagger.URL("/swagger/doc.json"),
+		httpSwagger.URL("http://go-api.localhost/swagger/doc.json"), // URL to JSON spec
+		// httpSwagger.URL("/swagger/doc.json"),
 	)).Methods("GET")
 
 	// start server

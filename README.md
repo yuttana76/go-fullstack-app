@@ -11,9 +11,7 @@ https://github.com/yuttana76/go-fullstack-app.git
 
 ### AWS 
 ssh -i "go-api-key.pem" ec2-user@43.209.235.148
-ssh -i "go-api-key.pem" ec2-user@ec2-43-209-235-148.ap-southeast-7.compute.amazonaws.com
-
-
+ssh -i "go-api-key.pem" ec2-user@ec2-43-209-235-116.ap-southeast-7.compute.amazonaws.com
 
 ## docker command
 >docker compose build

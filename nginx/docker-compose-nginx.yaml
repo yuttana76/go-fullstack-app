@@ -7,7 +7,7 @@ services:
       context: ../frontend
       dockerfile: next.dockerfile
     ports:
-      - '3000:3000'
+      - '3000'
     env_file:
       - ../frontend/.env.local
 
